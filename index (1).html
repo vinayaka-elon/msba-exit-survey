@@ -1,0 +1,1647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MSBA Exit Survey · Elon University</title>
+<meta name="description" content="An exit survey for graduating students of the M.S. in Business Analytics program at Elon University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   Elon MSBA Exit Survey — v3 (graduating students)
+   Material / Google design language. Lexend.
+   ============================================================ */
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-container: #f8f9fa;
+  --surface-variant: #f1f3f4;
+  --on-surface: #1f1f1f;
+  --on-surface-variant: #5f6368;
+  --on-surface-muted: #80868b;
+  --outline: #dadce0;
+  --outline-variant: #e8eaed;
+
+  --primary: #73000a;
+  --primary-hover: #520007;
+  --on-primary: #ffffff;
+  --primary-container: #fcebed;
+  --on-primary-container: #410005;
+  --secondary: #b6924a;
+
+  --error: #d93025;
+  --error-container: #fce8e6;
+  --success: #1e8e3e;
+
+  --elev-1: 0 1px 2px 0 rgba(60,64,67,.1), 0 1px 3px 1px rgba(60,64,67,.05);
+  --elev-2: 0 1px 3px 0 rgba(60,64,67,.15), 0 4px 8px 3px rgba(60,64,67,.05);
+
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-full: 999px;
+
+  --font: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --max-w: 720px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--on-surface);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App bar */
+.appbar {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--outline-variant);
+  z-index: 10;
+}
+.appbar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.brand-sub {
+  color: var(--on-surface-variant);
+  font-weight: 400;
+}
+.step-pill {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--primary-container);
+  padding: 6px 14px;
+  border-radius: var(--r-full);
+}
+
+.progress-rail {
+  height: 3px;
+  background: var(--surface-variant);
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  border-radius: 0 var(--r-full) var(--r-full) 0;
+  transition: width 480ms cubic-bezier(.4,0,.2,1);
+}
+
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 48px 24px 120px;
+}
+.step { display: none; animation: fadeUp 480ms cubic-bezier(.2,.7,.2,1) both; }
+.step.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  letter-spacing: 0.04em;
+  margin: 0 0 16px;
+}
+.display {
+  font-size: clamp(34px, 5.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+.lede {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--on-surface-variant);
+  max-width: 580px;
+  margin: 0 0 36px;
+}
+
+.welcome-letter {
+  max-width: 580px;
+  margin: 0 0 36px;
+}
+.welcome-body {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+  margin: 0 0 18px;
+}
+.welcome-body:last-of-type { margin-bottom: 0; }
+.welcome-body strong {
+  color: var(--on-surface);
+  font-weight: 500;
+}
+.signature {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--outline-variant);
+}
+.signature-name { font-weight: 500; color: var(--on-surface); }
+.signature-title { color: var(--on-surface-variant); font-size: 13px; }
+
+.meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 36px;
+}
+.meta-tile {
+  background: var(--surface-container);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+}
+.meta-num {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1;
+}
+.meta-lbl {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  margin-top: 6px;
+}
+@media (max-width: 540px) { .meta-row { grid-template-columns: 1fr; } }
+
+.id-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin: 0 0 32px;
+  box-shadow: var(--elev-1);
+}
+.id-note {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin: 0 0 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.section-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 40px;
+}
+
+.q { margin: 0 0 44px; }
+.q.optional .q-num { color: var(--on-surface-muted); }
+.q-num {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  margin: 0 0 8px;
+}
+.optional-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-surface-muted);
+  background: var(--surface-variant);
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  margin-left: 8px;
+  text-transform: uppercase;
+}
+.q-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0 0 6px;
+}
+.q-sub {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin: 0 0 20px;
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; margin: 0 0 16px; }
+.field-label { font-size: 13px; font-weight: 500; color: var(--on-surface-variant); }
+.field-hint { font-size: 12px; color: var(--on-surface-variant); padding-left: 14px; }
+.field-hint.error { color: var(--error); }
+.field-hint.success { color: var(--success); }
+
+input[type="text"], input[type="email"], select, textarea {
+  font-family: var(--font);
+  font-size: 16px;
+  color: var(--on-surface);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-sm);
+  padding: 14px;
+  outline: none;
+  transition: border-color 160ms, box-shadow 160ms;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(115,0,10,0.08);
+}
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><path fill='%235f6368' d='M5.25 7.5l4.75 5 4.75-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+textarea { resize: vertical; min-height: 96px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 540px) { .grid-2 { grid-template-columns: 1fr; gap: 12px; } }
+
+/* Chips (single-select) */
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--on-surface);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  padding: 10px 18px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all 160ms;
+}
+.chip:hover {
+  background: var(--surface-variant);
+  border-color: var(--on-surface-variant);
+}
+.chip.selected {
+  background: var(--primary-container);
+  border-color: var(--primary);
+  color: var(--on-primary-container);
+  font-weight: 500;
+  padding-left: 38px;
+  position: relative;
+}
+.chip.selected::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 6px; height: 11px;
+  border-right: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+.choice-col { display: flex; flex-direction: column; gap: 8px; }
+.choice-wide {
+  font-family: var(--font);
+  font-size: 15px;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  padding: 16px 20px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all 160ms;
+  text-align: left;
+  width: 100%;
+  color: var(--on-surface);
+}
+.choice-wide:hover {
+  background: var(--surface-variant);
+  border-color: var(--on-surface-variant);
+}
+.choice-wide.selected {
+  background: var(--primary-container);
+  border-color: var(--primary);
+  border-width: 2px;
+  padding: 15px 19px;
+  font-weight: 500;
+  color: var(--on-primary-container);
+}
+
+/* Multi-select */
+.check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.course-grid { margin-bottom: 16px; }
+.course-group {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 20px 0 8px;
+}
+.check-card {
+  font-family: var(--font);
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 160ms;
+  text-align: left;
+  color: var(--on-surface);
+}
+.check-card:hover {
+  background: var(--surface-variant);
+  border-color: var(--on-surface-variant);
+}
+.check-card.selected {
+  background: var(--primary-container);
+  border-color: var(--primary);
+  color: var(--on-primary-container);
+  font-weight: 500;
+}
+@media (max-width: 540px) { .check-grid { grid-template-columns: 1fr; } }
+.counter { font-size: 13px; color: var(--on-surface-variant); margin: 12px 0 0; }
+.char-count { font-size: 12px; color: var(--on-surface-muted); text-align: right; margin: 6px 4px 0 0; }
+
+/* Bootcamp cards */
+.bootcamp-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.bootcamp-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--r-md);
+  padding: 20px;
+  transition: box-shadow 200ms, opacity 200ms;
+}
+.bootcamp-card:hover { box-shadow: var(--elev-1); }
+.bootcamp-card.skipped { opacity: 0.7; }
+.bootcamp-card.skipped .bc-row { opacity: 0.35; pointer-events: none; }
+.bootcamp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.bootcamp-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.skip-toggle {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid var(--outline);
+  color: var(--on-surface-variant);
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all 140ms;
+}
+.skip-toggle:hover {
+  border-color: var(--on-surface);
+  color: var(--on-surface);
+}
+.skip-toggle.active {
+  background: var(--on-surface);
+  color: var(--surface);
+  border-color: var(--on-surface);
+}
+.bootcamp-name { font-size: 16px; font-weight: 500; margin: 0; line-height: 1.3; }
+.bootcamp-code {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 2px;
+}
+.bootcamp-now {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  white-space: nowrap;
+}
+.bc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--outline-variant);
+}
+@media (max-width: 560px) { .bc-row { grid-template-columns: 1fr; gap: 16px; } }
+.bc-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); margin: 0 0 8px; }
+
+/* Bootcamp 5-dot rating (larger) */
+.rating-row { display: flex; gap: 6px; }
+.rating-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--outline);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 140ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  padding: 0;
+  font-family: var(--font);
+}
+.rating-dot:hover { border-color: var(--primary); color: var(--primary); }
+.rating-dot.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.rating-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--on-surface-muted);
+  margin-top: 6px;
+}
+
+/* Bootcamp segmented format */
+.segmented {
+  display: inline-flex;
+  background: var(--surface-variant);
+  border-radius: var(--r-full);
+  padding: 3px;
+}
+.seg-btn {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all 140ms;
+}
+.seg-btn:hover { color: var(--on-surface); }
+.seg-btn.selected {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--elev-1);
+}
+
+/* Skill scale grid */
+.skill-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  padding: 0 4px;
+  margin: 12px 0 16px;
+}
+.skill-legend span:first-child { color: var(--on-surface-muted); }
+.skill-group-card {
+  background: var(--surface-container);
+  border-radius: var(--r-md);
+  padding: 20px;
+  margin-bottom: 12px;
+}
+.skill-group-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.skill-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--outline-variant);
+}
+.skill-row:last-child { border-bottom: none; }
+.skill-label { font-size: 14px; color: var(--on-surface); }
+.skill-scale { display: flex; gap: 5px; }
+.scale-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--outline);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 140ms;
+  padding: 0;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-surface-muted);
+}
+.scale-dot:hover { border-color: var(--primary); color: var(--primary); }
+.scale-dot.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+@media (max-width: 540px) {
+  .skill-row { grid-template-columns: 1fr; gap: 8px; padding: 12px 0; }
+  .scale-dot { width: 30px; height: 30px; }
+}
+
+/* NPS */
+.nps-wrap {
+  background: var(--surface-container);
+  border-radius: var(--r-lg);
+  padding: 28px;
+}
+#nps {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--outline);
+  border-radius: var(--r-full);
+  outline: none;
+  margin: 0 0 20px;
+}
+#nps::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: grab;
+  border: 3px solid var(--surface);
+  box-shadow: var(--elev-2);
+}
+#nps::-moz-range-thumb {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: grab;
+  border: 3px solid var(--surface);
+  box-shadow: var(--elev-2);
+}
+.nps-readout { display: flex; align-items: baseline; gap: 14px; margin: 0 0 12px; }
+.nps-num { font-size: 48px; font-weight: 600; line-height: 1; color: var(--primary); }
+.nps-label { font-size: 18px; font-weight: 500; color: var(--on-surface-variant); }
+.nps-scale { display: flex; justify-content: space-between; font-size: 12px; color: var(--on-surface-variant); }
+.optional-field { margin-top: 20px; }
+
+.opt-ins .q-num { color: var(--secondary); }
+.opt-in {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--r-md);
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 140ms;
+  background: var(--surface);
+}
+.opt-in:hover { background: var(--surface-variant); border-color: var(--on-surface-variant); }
+.opt-in input[type="checkbox"] {
+  width: 20px; height: 20px;
+  accent-color: var(--primary);
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--outline-variant);
+  gap: 12px;
+}
+.btn-filled {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all 180ms;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--elev-1);
+}
+.btn-filled:hover { background: var(--primary-hover); box-shadow: var(--elev-2); transform: translateY(-1px); }
+.btn-filled:disabled { background: var(--on-surface-muted); cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-filled .arr { transition: transform 200ms; font-size: 18px; }
+.btn-filled:hover .arr { transform: translateX(3px); }
+.btn-text {
+  background: transparent;
+  color: var(--on-surface-variant);
+  border: none;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 14px 18px;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all 140ms;
+}
+.btn-text:hover { background: var(--surface-variant); color: var(--on-surface); }
+
+.error-banner {
+  background: var(--error-container);
+  border-left: 4px solid var(--error);
+  border-radius: var(--r-sm);
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--error);
+}
+
+.thanks { padding-top: 40px; }
+.thanks-card {
+  background: var(--primary-container);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin: 28px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--on-primary-container);
+}
+.thanks-card p { margin: 0; }
+
+.error-state .display { color: var(--error); }
+.error-detail {
+  font-size: 12px;
+  color: var(--on-surface-muted);
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--outline-variant);
+  word-break: break-word;
+}
+
+.foot {
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  color: var(--on-surface-muted);
+  border-top: 1px solid var(--outline-variant);
+}
+.submitting { pointer-events: none; opacity: 0.6; }
+</style>
+</head>
+
+<body>
+
+<div class="appbar">
+  <div class="appbar-inner">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>Elon MSBA <span class="brand-sub">· Exit Survey</span></span>
+    </div>
+    <div class="step-pill" id="stepPill">Welcome</div>
+  </div>
+  <div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<main class="page">
+
+<!-- STEP 0: Welcome -->
+<section class="step active" data-step="0">
+  <p class="eyebrow">Graduating Class</p>
+  <h1 class="display">How well did we prepare you?</h1>
+
+  <div class="welcome-letter">
+    <p class="welcome-body">
+      You're about to graduate from the MSBA program. Before you head off,
+      I want to know how it actually went for you. What worked, what didn't,
+      where you feel ready, and where you don't.
+    </p>
+    <p class="welcome-body">
+      <strong>Your honest feedback genuinely shapes the program.</strong>
+      Every year we revise the curriculum based on what graduating students tell us in this survey.
+      The bootcamp format, the elective lineup, the way we teach a bunch of these classes,
+      all of it has changed because of student responses. So if something didn't work,
+      please say so. If something really did, that helps too.
+    </p>
+    <p class="welcome-body">
+      It takes about seven minutes. Thanks for taking the time.
+    </p>
+    <p class="signature">
+      <span class="signature-name">Dr. Vinayaka Gude</span><br>
+      <span class="signature-title">Assistant Professor, Business Analytics</span>
+    </p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-tile"><span class="meta-num">15</span><span class="meta-lbl">Questions</span></div>
+    <div class="meta-tile"><span class="meta-num">~7</span><span class="meta-lbl">Minutes</span></div>
+    <div class="meta-tile"><span class="meta-num">6</span><span class="meta-lbl">Sections</span></div>
+  </div>
+
+  <div class="id-card">
+    <p class="id-note">Responses are tied to your name and email so the program can follow up if you'd like. Only program faculty and staff see the data.</p>
+    <div class="field">
+      <label class="field-label" for="respName">Full name</label>
+      <input type="text" id="respName" autocomplete="name" placeholder="Jane Doe">
+    </div>
+    <div class="field">
+      <label class="field-label" for="respEmail">Elon email</label>
+      <input type="email" id="respEmail" autocomplete="email" placeholder="jdoe@elon.edu">
+      <span class="field-hint" id="emailHint">Must be an @elon.edu address.</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <span></span>
+    <button class="btn-filled" data-action="next">Begin <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 1: About You -->
+<section class="step" data-step="1">
+  <p class="section-tag">Section 01</p>
+  <h2 class="section-title">About you</h2>
+
+  <div class="q">
+    <p class="q-num">Q1</p>
+    <h3 class="q-title">Which program track are you graduating from?</h3>
+    <div class="chip-row" data-single="track">
+      <button class="chip" data-val="Full-time · Elon campus">Full-time · Elon campus</button>
+      <button class="chip" data-val="Part-time · Elon campus">Part-time · Elon campus</button>
+      <button class="chip" data-val="Flex · Charlotte">Flex · Charlotte</button>
+      <button class="chip" data-val="NEOMA dual degree">NEOMA dual degree</button>
+      <button class="chip" data-val="Healthcare Analytics Certificate">Healthcare Analytics Cert</button>
+      <button class="chip" data-val="Other">Other</button>
+    </div>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q2</p>
+    <h3 class="q-title">What kind of role are you targeting after graduation?</h3>
+    <div class="grid-2">
+      <div class="field">
+        <label class="field-label" for="role">Target role / title</label>
+        <input type="text" id="role" placeholder="Data Analyst, BI Developer, etc.">
+      </div>
+      <div class="field">
+        <label class="field-label" for="industry">Target industry</label>
+        <input type="text" id="industry" placeholder="Healthcare, Finance, Tech, etc.">
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q3</p>
+    <h3 class="q-title">Where are you in your job search?</h3>
+    <div class="chip-row" data-single="jobStatus">
+      <button class="chip" data-val="Already accepted an offer">Accepted offer</button>
+      <button class="chip" data-val="Late-stage interviews">Late-stage interviews</button>
+      <button class="chip" data-val="Actively applying">Actively applying</button>
+      <button class="chip" data-val="Just starting search">Just starting</button>
+      <button class="chip" data-val="Continuing to further studies">Further studies</button>
+      <button class="chip" data-val="Switching paths">Switching paths</button>
+      <button class="chip" data-val="Other">Other</button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-text" data-action="back">← Back</button>
+    <button class="btn-filled" data-action="next">Next <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 2: The Bootcamp -->
+<section class="step" data-step="2">
+  <p class="section-tag">Section 02</p>
+  <h2 class="section-title">The summer bootcamp</h2>
+
+  <div class="q">
+    <p class="q-num">Q4</p>
+    <h3 class="q-title">Did the bootcamps prepare you, and what format should we use going forward?</h3>
+    <p class="q-sub">For each bootcamp: how prepared did it leave you, and what format should we use going forward? Use the toggle in the corner if you didn't take one.</p>
+    <div class="bootcamp-grid" id="bootcampGrid"></div>
+  </div>
+
+  <div class="q optional">
+    <p class="q-num">Q5 <span class="optional-tag">optional</span></p>
+    <h3 class="q-title">Anything specific about the bootcamp experience?</h3>
+    <p class="q-sub">Pacing, instructors, the July timing, the in-person week, whatever stands out.</p>
+    <textarea id="bootcampNotes" rows="3" maxlength="500" placeholder="One or two sentences."></textarea>
+    <p class="char-count"><span id="bootcampNotesCount">0</span> / 500</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-text" data-action="back">← Back</button>
+    <button class="btn-filled" data-action="next">Next <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 3: Skill preparedness -->
+<section class="step" data-step="3">
+  <p class="section-tag">Section 03</p>
+  <h2 class="section-title">Skill preparedness</h2>
+
+  <div class="q">
+    <p class="q-num">Q6</p>
+    <h3 class="q-title">How prepared do you feel in each skill?</h3>
+    <p class="q-sub">Be honest. The clearer you are, the more useful this is.</p>
+    <div class="skill-legend"><span>1 · Not covered / not prepared</span><span>5 · Fully prepared</span></div>
+    <div id="skillGrid"></div>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q7</p>
+    <h3 class="q-title">If the program could close 3 gaps before you graduate, which?</h3>
+    <p class="q-sub">Pick up to three. The scale above gives us the full picture. This one tells us what to fix first.</p>
+    <div class="check-grid" data-multi="gaps" data-max="3">
+      <button class="check-card" data-val="Python depth">Python depth</button>
+      <button class="check-card" data-val="SQL / databases">SQL / databases</button>
+      <button class="check-card" data-val="Tableau / visualization">Tableau / visualization</button>
+      <button class="check-card" data-val="Machine learning">Machine learning</button>
+      <button class="check-card" data-val="Statistics depth">Statistics depth</button>
+      <button class="check-card" data-val="Communication / storytelling">Communication / storytelling</button>
+      <button class="check-card" data-val="Business / financial literacy">Business / financial literacy</button>
+      <button class="check-card" data-val="Project management">Project management</button>
+      <button class="check-card" data-val="Deep learning / LLMs">Deep learning / LLMs</button>
+    </div>
+    <p class="counter"><span id="gapsCount">0</span> of 3 selected</p>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q8</p>
+    <h3 class="q-title">One thing the program didn't teach that you wish it had.</h3>
+    <textarea id="missingSkill" rows="3" maxlength="400" placeholder="A specific tool, concept, or way of working."></textarea>
+    <p class="char-count"><span id="missingCount">0</span> / 400</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-text" data-action="back">← Back</button>
+    <button class="btn-filled" data-action="next">Next <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 4: What worked -->
+<section class="step" data-step="4">
+  <p class="section-tag">Section 04</p>
+  <h2 class="section-title">What worked</h2>
+
+  <div class="q">
+    <p class="q-num">Q9</p>
+    <h3 class="q-title">Pick the two most valuable courses you took.</h3>
+    <p class="q-sub">Only two. We're forcing you to choose.</p>
+
+    <p class="course-group">Analytics core</p>
+    <div class="check-grid course-grid" data-multi="bestCourses" data-max="2">
+      <button class="check-card" data-val="MSBA 6605 Data Driven Analytical Models">6605 · Data Driven Analytical Models</button>
+      <button class="check-card" data-val="MSBA 6615 Information Storage & Data Viz">6615 · Information Storage & Data Viz</button>
+      <button class="check-card" data-val="MSBA 6620 Business Data Mining & ML">6620 · Business Data Mining & ML</button>
+      <button class="check-card" data-val="MSBA 6650 Responsible Analytics">6650 · Responsible Analytics</button>
+    </div>
+
+    <p class="course-group">Management core</p>
+    <div class="check-grid course-grid" data-multi="bestCourses" data-max="2">
+      <button class="check-card" data-val="MSBA 6100 Business for the Greater Good">6100 · Business for the Greater Good</button>
+      <button class="check-card" data-val="MSBA 6230 Principled Leadership">6230 · Principled Leadership</button>
+      <button class="check-card" data-val="MSBA 6270 Applied Marketing Management">6270 · Applied Marketing Management</button>
+      <button class="check-card" data-val="MSBA 6450 Project Management">6450 · Project Management</button>
+      <button class="check-card" data-val="MSBA 7150 Quantitative Decision-Making with Accounting Data">7150 · Quant Decision-Making</button>
+      <button class="check-card" data-val="MSBA 7170 Financial Management">7170 · Financial Management</button>
+    </div>
+
+    <p class="course-group">Electives</p>
+    <div class="check-grid course-grid" data-multi="bestCourses" data-max="2">
+      <button class="check-card" data-val="MSBA 6610 Business Forecasting & Decision Models">6610 · Forecasting & Decision Models</button>
+      <button class="check-card" data-val="MSBA 6660 Deep Learning for Business">6660 · Deep Learning for Business</button>
+      <button class="check-card" data-val="MSBA 6670 Essentials of Marketing Analytics">6670 · Marketing Analytics</button>
+      <button class="check-card" data-val="MSBA 6675 Essentials of Supply Chain Analytics">6675 · Supply Chain Analytics</button>
+      <button class="check-card" data-val="MSBA 6680 Financial Industry Analytics">6680 · Financial Industry Analytics</button>
+      <button class="check-card" data-val="MSBA 6685 Healthcare Analytics">6685 · Healthcare Analytics</button>
+      <button class="check-card" data-val="MSBA 6690 Sports Analytics">6690 · Sports Analytics</button>
+    </div>
+    <p class="counter"><span id="bestCoursesCount">0</span> of 2 selected</p>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q10</p>
+    <h3 class="q-title">In one sentence, why those?</h3>
+    <textarea id="whyBest" rows="3" maxlength="400" placeholder="What made them stick."></textarea>
+    <p class="char-count"><span id="whyBestCount">0</span> / 400</p>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q11</p>
+    <h3 class="q-title">Best experience outside the classroom?</h3>
+    <div class="chip-row" data-single="bestNonClass">
+      <button class="chip" data-val="Capstone project">Capstone project</button>
+      <button class="chip" data-val="External internship">External internship</button>
+      <button class="chip" data-val="Center for Organizational Analytics project">COA project</button>
+      <button class="chip" data-val="A specific professor / mentor">Professor / mentor</button>
+      <button class="chip" data-val="Cohort / peer relationships">Cohort / peers</button>
+      <button class="chip" data-val="Career services">Career services</button>
+      <button class="chip" data-val="Other">Other</button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-text" data-action="back">← Back</button>
+    <button class="btn-filled" data-action="next">Next <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 5: What didn't -->
+<section class="step" data-step="5">
+  <p class="section-tag">Section 05</p>
+  <h2 class="section-title">What didn't</h2>
+
+  <div class="q">
+    <p class="q-num">Q12</p>
+    <h3 class="q-title">If you could change one thing about the curriculum?</h3>
+    <div class="choice-col" data-single="oneChange">
+      <button class="choice-wide" data-val="Add a course on a topic we don't cover">Add a course on something we don't cover</button>
+      <button class="choice-wide" data-val="Cut or shrink a course">Cut or shrink a course</button>
+      <button class="choice-wide" data-val="More hands-on projects with real data">More hands-on projects with real data</button>
+      <button class="choice-wide" data-val="More career prep / industry exposure">More career prep / industry exposure</button>
+      <button class="choice-wide" data-val="More current tools (cloud, modern AI, MLOps)">More current tools (cloud, modern AI, MLOps)</button>
+      <button class="choice-wide" data-val="Better pacing or sequencing">Better pacing or sequencing</button>
+      <button class="choice-wide" data-val="Other">Other</button>
+    </div>
+    <input type="text" id="oneChangeOther" placeholder="Tell us more…" style="display:none; margin-top:12px">
+  </div>
+
+  <div class="q optional">
+    <p class="q-num">Q13 <span class="optional-tag">optional</span></p>
+    <h3 class="q-title">A course or experience that didn't deliver. Why?</h3>
+    <p class="q-sub">Be specific if you can. Skip if nothing comes to mind.</p>
+    <textarea id="didntDeliver" rows="4" maxlength="600" placeholder="Course name + what fell short."></textarea>
+    <p class="char-count"><span id="didntDeliverCount">0</span> / 600</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-text" data-action="back">← Back</button>
+    <button class="btn-filled" data-action="next">Next <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 6: Forward -->
+<section class="step" data-step="6">
+  <p class="section-tag">Section 06</p>
+  <h2 class="section-title">Looking forward</h2>
+
+  <div class="q">
+    <p class="q-num">Q14</p>
+    <h3 class="q-title">If the program offered a dedicated AI tutor, what would you use it for?</h3>
+    <p class="q-sub">Pick everything that applies, or pick "I wouldn't use one."</p>
+    <div class="check-grid" data-multi="aiTutor">
+      <button class="check-card" data-val="Explaining concepts I missed in class">Explaining concepts I missed in class</button>
+      <button class="check-card" data-val="Debugging code">Debugging code</button>
+      <button class="check-card" data-val="Practice problems and exam prep">Practice problems and exam prep</button>
+      <button class="check-card" data-val="Walking through statistical results">Walking through statistical results</button>
+      <button class="check-card" data-val="Structuring projects or analyses">Structuring projects or analyses</button>
+      <button class="check-card" data-val="Reviewing my work before submitting">Reviewing my work before submitting</button>
+      <button class="check-card" data-val="Late night help when nothing else is open">Late night help when nothing else is open</button>
+      <button class="check-card" data-val="I already use ChatGPT or similar for this">I already use ChatGPT or similar for this</button>
+      <button class="check-card" data-val="I wouldn't use one">I wouldn't use one</button>
+    </div>
+  </div>
+
+  <div class="q">
+    <p class="q-num">Q15</p>
+    <h3 class="q-title">Would you recommend the program to a prospective MSBA applicant?</h3>
+    <div class="nps-wrap">
+      <input type="range" id="nps" min="0" max="10" step="1" value="7">
+      <div class="nps-readout">
+        <span class="nps-num" id="npsNum">7</span>
+        <span class="nps-label" id="npsLabel">Likely</span>
+      </div>
+      <div class="nps-scale">
+        <span>0 · Not at all</span>
+        <span>10 · Definitely</span>
+      </div>
+    </div>
+    <div class="field optional-field">
+      <label class="field-label" for="npsWhy">One line on why <span class="optional-tag">optional</span></label>
+      <input type="text" id="npsWhy" maxlength="200" placeholder="The honest version.">
+    </div>
+  </div>
+
+  <div class="q opt-ins">
+    <p class="q-num">+ Opt-ins</p>
+    <h3 class="q-title">Anything you'd like to stay involved with after graduation?</h3>
+    <label class="opt-in"><input type="checkbox" id="optMentor"> <span>I'd be willing to mentor future MSBA students.</span></label>
+    <label class="opt-in"><input type="checkbox" id="optQuote"> <span>You can attribute quotes from this survey to me.</span></label>
+    <label class="opt-in"><input type="checkbox" id="optContact"> <span>It's fine to contact me with follow-up questions.</span></label>
+  </div>
+
+  <div class="actions">
+    <button class="btn-text" data-action="back">← Back</button>
+    <button class="btn-filled" data-action="submit" id="submitBtn">Submit <span class="arr">→</span></button>
+  </div>
+</section>
+
+<!-- STEP 7: Thank you -->
+<section class="step thanks" data-step="7">
+  <p class="eyebrow">Submitted</p>
+  <h1 class="display">Thank you.</h1>
+  <p class="lede">Your feedback goes straight to the MSBA program faculty. The honest answers are the ones that change things. Congratulations on finishing.</p>
+  <div class="thanks-card">
+    <p>If you'd like to keep helping shape the program (mentoring, occasional interviews, advisory conversations), you'll hear from us based on the opt-ins you selected.</p>
+  </div>
+</section>
+
+<!-- Error -->
+<section class="step error-state" data-step="error">
+  <p class="eyebrow" style="color:var(--error)">Something went wrong</p>
+  <h1 class="display">Submission didn't go through.</h1>
+  <p class="lede">A network or server error stopped the submission. Your answers are still saved in this browser. Try again in a moment.</p>
+  <div class="actions">
+    <span></span>
+    <button class="btn-filled" data-action="retry">Try again</button>
+  </div>
+  <p class="error-detail" id="errorDetail"></p>
+</section>
+
+</main>
+
+<footer class="foot">
+  M.S. in Business Analytics · Love School of Business · Elon University
+</footer>
+
+<script>
+/* ============================================================
+   Elon MSBA Exit Survey — v3 script
+   ============================================================ */
+
+const SUBMIT_ENDPOINT = "REPLACE_WITH_YOUR_APPS_SCRIPT_URL";
+const REQUIRED_EMAIL_DOMAIN = "elon.edu";
+const TOTAL_STEPS = 7;
+const DRAFT_KEY = "elon-msba-exit-draft-v3";
+
+const BOOTCAMPS = [
+  { code: "5002", name: "Python Programming",       now: "Currently online · async" },
+  { code: "5003", name: "Statistics Foundations",   now: "Currently online · async" },
+  { code: "5011", name: "Power Skills",             now: "Currently in-person" },
+  { code: "5012", name: "Excel Foundations",        now: "Currently in-person" }
+];
+
+const SKILLS = [
+  { group: "Programming & Tools", items: [
+    { id: "python",     label: "Python" },
+    { id: "sql",        label: "SQL / databases" },
+    { id: "r",          label: "R" },
+    { id: "excel",      label: "Excel / spreadsheets" },
+    { id: "tableau",    label: "Tableau / data visualization" }
+  ]},
+  { group: "Analytics & Modeling", items: [
+    { id: "stats",         label: "Statistics & experimental design" },
+    { id: "ml",            label: "Machine learning / predictive modeling" },
+    { id: "dl",            label: "Deep learning / NLP / LLMs" },
+    { id: "optimization",  label: "Optimization / forecasting" },
+    { id: "storytelling",  label: "Data storytelling / communication" }
+  ]},
+  { group: "Business & Professional", items: [
+    { id: "business",    label: "Business / financial literacy" },
+    { id: "pm",          label: "Project management" },
+    { id: "ethics",      label: "Ethics & data governance" }
+  ]}
+];
+
+const STEP_LABELS = ["Welcome","About you","Bootcamp","Skills","What worked","What didn't","Forward","Done"];
+
+const state = {
+  step: 0,
+  data: {
+    name: "", email: "",
+    track: "", role: "", industry: "", jobStatus: "",
+    bootcamps: {}, bootcampNotes: "",
+    skillScale: {},
+    gaps: [], missingSkill: "",
+    bestCourses: [], whyBest: "", bestNonClass: "",
+    oneChange: "", oneChangeOther: "", didntDeliver: "",
+    aiTutor: [],
+    nps: 7, npsWhy: "",
+    optMentor: false, optQuote: false, optContact: false,
+    submittedAt: ""
+  }
+};
+
+BOOTCAMPS.forEach(b => state.data.bootcamps[b.code] = { rating: 0, format: "" });
+SKILLS.forEach(grp => grp.items.forEach(s => state.data.skillScale[s.id] = 0));
+
+const $ = (sel, ctx=document) => ctx.querySelector(sel);
+const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+const cssEscape = s => String(s).replace(/(["\\])/g, "\\$1");
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderBootcamps();
+  renderSkillGrid();
+  loadDraft();
+  attachEvents();
+  renderStep();
+});
+
+function renderBootcamps() {
+  const grid = $("#bootcampGrid");
+  grid.innerHTML = "";
+  BOOTCAMPS.forEach(b => {
+    const card = document.createElement("div");
+    card.className = "bootcamp-card";
+    card.dataset.code = b.code;
+    card.innerHTML = `
+      <div class="bootcamp-header">
+        <div>
+          <span class="bootcamp-code">MSBA ${b.code}</span>
+          <h4 class="bootcamp-name">${b.name}</h4>
+        </div>
+        <div class="bootcamp-meta">
+          <span class="bootcamp-now">${b.now}</span>
+          <button class="skip-toggle" data-skip="${b.code}">I didn't take this</button>
+        </div>
+      </div>
+      <div class="bc-row">
+        <div>
+          <p class="bc-label">How well did it prepare you?</p>
+          <div class="rating-row" data-rating="${b.code}">
+            ${[1,2,3,4,5].map(n => `<button class="rating-dot" data-val="${n}">${n}</button>`).join("")}
+          </div>
+          <div class="rating-legend"><span>Not at all</span><span>Very well</span></div>
+        </div>
+        <div>
+          <p class="bc-label">Best format going forward?</p>
+          <div class="segmented" data-format="${b.code}">
+            <button class="seg-btn" data-val="In-person">In-person</button>
+            <button class="seg-btn" data-val="Online">Online</button>
+            <button class="seg-btn" data-val="Hybrid">Hybrid</button>
+          </div>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderSkillGrid() {
+  const root = $("#skillGrid");
+  root.innerHTML = "";
+  SKILLS.forEach(grp => {
+    const card = document.createElement("div");
+    card.className = "skill-group-card";
+    card.innerHTML = `<p class="skill-group-name">${grp.group}</p>`;
+    grp.items.forEach(s => {
+      const row = document.createElement("div");
+      row.className = "skill-row";
+      row.innerHTML = `
+        <span class="skill-label">${s.label}</span>
+        <div class="skill-scale" data-skill="${s.id}">
+          ${[1,2,3,4,5].map(n => `<button class="scale-dot" data-val="${n}" aria-label="${s.label}: ${n} of 5">${n}</button>`).join("")}
+        </div>
+      `;
+      card.appendChild(row);
+    });
+    root.appendChild(card);
+  });
+}
+
+function saveDraft() {
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step: state.step, data: state.data })); } catch(e){}
+}
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return;
+    const saved = JSON.parse(raw); if (!saved || !saved.data) return;
+    Object.assign(state.data, saved.data);
+    hydrateFields();
+  } catch(e) {}
+}
+function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch(e){} }
+
+function hydrateFields() {
+  const d = state.data;
+  ["respName:name","respEmail:email","role:role","industry:industry","missingSkill:missingSkill","whyBest:whyBest","didntDeliver:didntDeliver","oneChangeOther:oneChangeOther","npsWhy:npsWhy","bootcampNotes:bootcampNotes"]
+    .forEach(p => { const [id,k] = p.split(":"); if (d[k]) $("#"+id).value = d[k]; });
+
+  if (typeof d.nps === "number") { $("#nps").value = d.nps; updateNpsLabel(d.nps); }
+
+  updateCount("missingSkill","missingCount");
+  updateCount("whyBest","whyBestCount");
+  updateCount("didntDeliver","didntDeliverCount");
+  updateCount("bootcampNotes","bootcampNotesCount");
+
+  restoreSingle("track", d.track);
+  restoreSingle("jobStatus", d.jobStatus);
+  restoreSingle("bestNonClass", d.bestNonClass);
+  restoreSingle("oneChange", d.oneChange);
+  restoreMulti("gaps", d.gaps);
+  restoreMulti("bestCourses", d.bestCourses);
+  restoreMulti("aiTutor", d.aiTutor);
+
+  $("#optMentor").checked = !!d.optMentor;
+  $("#optQuote").checked = !!d.optQuote;
+  $("#optContact").checked = !!d.optContact;
+
+  if (d.oneChange === "Other") $("#oneChangeOther").style.display = "block";
+
+  // Bootcamps
+  Object.keys(d.bootcamps || {}).forEach(code => {
+    const bc = d.bootcamps[code];
+    if (bc.rating) {
+      $$(`.rating-row[data-rating="${code}"] .rating-dot`).forEach(dot => {
+        if (parseInt(dot.dataset.val,10) <= bc.rating) dot.classList.add("selected");
+      });
+    }
+    if (bc.format) {
+      if (bc.format === "Didn't take") {
+        const card = document.querySelector(`.bootcamp-card[data-code="${code}"]`);
+        if (card) card.classList.add("skipped");
+        const toggle = document.querySelector(`.skip-toggle[data-skip="${code}"]`);
+        if (toggle) { toggle.classList.add("active"); toggle.textContent = "Didn't take ✓"; }
+      } else {
+        $$(`.segmented[data-format="${code}"] .seg-btn`).forEach(s => {
+          if (s.dataset.val === bc.format) s.classList.add("selected");
+        });
+      }
+    }
+  });
+
+  // Skill scale
+  Object.keys(d.skillScale || {}).forEach(id => {
+    const val = d.skillScale[id];
+    if (!val) return;
+    $$(`.skill-scale[data-skill="${id}"] .scale-dot`).forEach(dot => {
+      if (parseInt(dot.dataset.val,10) <= val) dot.classList.add("selected");
+    });
+  });
+
+  updateMultiCount("gaps");
+  updateMultiCount("bestCourses");
+}
+
+function restoreSingle(group, val) {
+  if (!val) return;
+  const c = document.querySelector(`[data-single="${group}"]`);
+  if (!c) return;
+  const btn = c.querySelector(`[data-val="${cssEscape(val)}"]`);
+  if (btn) btn.classList.add("selected");
+}
+function restoreMulti(group, vals) {
+  if (!vals || !vals.length) return;
+  document.querySelectorAll(`[data-multi="${group}"]`).forEach(c => {
+    vals.forEach(v => {
+      const btn = c.querySelector(`[data-val="${cssEscape(v)}"]`);
+      if (btn) btn.classList.add("selected");
+    });
+  });
+}
+
+function attachEvents() {
+  document.body.addEventListener("click", e => {
+    const btn = e.target.closest("[data-action]"); if (!btn) return;
+    const a = btn.dataset.action;
+    if (a === "next") goNext();
+    else if (a === "back") goBack();
+    else if (a === "submit") submit();
+    else if (a === "retry") submit();
+  });
+
+  bindInput("#respName","name");
+  bindInput("#respEmail","email",validateEmailLive);
+  bindInput("#role","role");
+  bindInput("#industry","industry");
+  bindInput("#missingSkill","missingSkill",() => updateCount("missingSkill","missingCount"));
+  bindInput("#whyBest","whyBest",() => updateCount("whyBest","whyBestCount"));
+  bindInput("#didntDeliver","didntDeliver",() => updateCount("didntDeliver","didntDeliverCount"));
+  bindInput("#bootcampNotes","bootcampNotes",() => updateCount("bootcampNotes","bootcampNotesCount"));
+  bindInput("#oneChangeOther","oneChangeOther");
+  bindInput("#npsWhy","npsWhy");
+
+  $("#nps").addEventListener("input", () => {
+    state.data.nps = parseInt($("#nps").value,10);
+    updateNpsLabel(state.data.nps);
+    saveDraft();
+  });
+
+  $("#optMentor").addEventListener("change", e => { state.data.optMentor = e.target.checked; saveDraft(); });
+  $("#optQuote").addEventListener("change", e => { state.data.optQuote = e.target.checked; saveDraft(); });
+  $("#optContact").addEventListener("change", e => { state.data.optContact = e.target.checked; saveDraft(); });
+
+  // Single-select chips / wide
+  document.querySelectorAll("[data-single]").forEach(group => {
+    const key = group.dataset.single;
+    group.addEventListener("click", e => {
+      const btn = e.target.closest(".chip, .choice-wide");
+      if (!btn) return;
+      e.preventDefault();
+      group.querySelectorAll(".chip, .choice-wide").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      state.data[key] = btn.dataset.val;
+      if (key === "oneChange") {
+        const o = $("#oneChangeOther");
+        if (o) o.style.display = btn.dataset.val === "Other" ? "block" : "none";
+      }
+      saveDraft();
+    });
+  });
+
+  // Multi-select with max
+  document.querySelectorAll("[data-multi]").forEach(group => {
+    group.addEventListener("click", e => {
+      const btn = e.target.closest(".check-card"); if (!btn) return;
+      e.preventDefault();
+      const key = group.dataset.multi;
+      const max = parseInt(group.dataset.max || "999", 10);
+      const isSel = btn.classList.contains("selected");
+      const allGroups = document.querySelectorAll(`[data-multi="${key}"]`);
+      const selected = [];
+      allGroups.forEach(g => g.querySelectorAll(".check-card.selected").forEach(b => selected.push(b)));
+      if (isSel) btn.classList.remove("selected");
+      else {
+        if (selected.length >= max) {
+          const c = document.getElementById(`${key}Count`);
+          if (c) { c.parentElement.style.color = "var(--error)"; setTimeout(() => c.parentElement.style.color = "", 600); }
+          return;
+        }
+        btn.classList.add("selected");
+      }
+      state.data[key] = [];
+      allGroups.forEach(g => g.querySelectorAll(".check-card.selected").forEach(b => state.data[key].push(b.dataset.val)));
+      updateMultiCount(key);
+      saveDraft();
+    });
+  });
+
+  // Bootcamp ratings
+  document.querySelectorAll(".rating-row").forEach(row => {
+    const code = row.dataset.rating;
+    row.addEventListener("click", e => {
+      const dot = e.target.closest(".rating-dot"); if (!dot) return;
+      e.preventDefault();
+      const val = parseInt(dot.dataset.val,10);
+      const current = state.data.bootcamps[code].rating;
+      const newVal = (current === val) ? 0 : val;
+      state.data.bootcamps[code].rating = newVal;
+      row.querySelectorAll(".rating-dot").forEach(d => {
+        d.classList.toggle("selected", parseInt(d.dataset.val,10) <= newVal);
+      });
+      saveDraft();
+    });
+  });
+
+  // Bootcamp format
+  document.querySelectorAll(".segmented").forEach(seg => {
+    const code = seg.dataset.format;
+    seg.addEventListener("click", e => {
+      const btn = e.target.closest(".seg-btn"); if (!btn) return;
+      e.preventDefault();
+      seg.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      state.data.bootcamps[code].format = btn.dataset.val;
+      saveDraft();
+    });
+  });
+
+  // Bootcamp skip toggle (header level "I didn't take this")
+  document.querySelectorAll(".skip-toggle").forEach(toggle => {
+    toggle.addEventListener("click", e => {
+      e.preventDefault();
+      const code = toggle.dataset.skip;
+      const card = document.querySelector(`.bootcamp-card[data-code="${code}"]`);
+      const isSkipped = toggle.classList.toggle("active");
+      if (card) card.classList.toggle("skipped", isSkipped);
+      if (isSkipped) {
+        // Clear rating and format
+        state.data.bootcamps[code].rating = 0;
+        state.data.bootcamps[code].format = "Didn't take";
+        document.querySelectorAll(`.rating-row[data-rating="${code}"] .rating-dot`).forEach(d => d.classList.remove("selected"));
+        document.querySelectorAll(`.segmented[data-format="${code}"] .seg-btn`).forEach(b => b.classList.remove("selected"));
+        toggle.textContent = "Didn't take ✓";
+      } else {
+        state.data.bootcamps[code].format = "";
+        toggle.textContent = "I didn't take this";
+      }
+      saveDraft();
+    });
+  });
+
+  // Skill scale dots — fill from 1 up to clicked, click same again to clear
+  document.querySelectorAll(".skill-scale").forEach(scale => {
+    const id = scale.dataset.skill;
+    scale.addEventListener("click", e => {
+      const dot = e.target.closest(".scale-dot"); if (!dot) return;
+      e.preventDefault();
+      const val = parseInt(dot.dataset.val,10);
+      const current = state.data.skillScale[id];
+      const newVal = (current === val) ? 0 : val;
+      state.data.skillScale[id] = newVal;
+      scale.querySelectorAll(".scale-dot").forEach(d => {
+        d.classList.toggle("selected", parseInt(d.dataset.val,10) <= newVal);
+      });
+      saveDraft();
+    });
+  });
+}
+
+function bindInput(sel,key,extra) {
+  const el = $(sel); if (!el) return;
+  const evt = el.tagName === "SELECT" ? "change" : "input";
+  el.addEventListener(evt, () => { state.data[key] = el.value; if (extra) extra(); saveDraft(); });
+}
+
+function updateCount(inputId,countId) {
+  const el = $("#"+inputId); const c = $("#"+countId);
+  if (el && c) c.textContent = el.value.length;
+}
+function updateMultiCount(key) {
+  const c = document.getElementById(`${key}Count`);
+  if (c) c.textContent = state.data[key].length;
+}
+function updateNpsLabel(v) {
+  $("#npsNum").textContent = v;
+  const labels = ["Not at all","Hardly","Doubtful","Maybe not","On the fence","Leaning yes","Likely","Likely","Strongly","Yes","Absolutely"];
+  $("#npsLabel").textContent = labels[v] || "";
+}
+function validateEmailLive() {
+  const v = $("#respEmail").value.trim().toLowerCase();
+  const h = $("#emailHint");
+  if (!v) { h.textContent = `Must be an @${REQUIRED_EMAIL_DOMAIN} address.`; h.className = "field-hint"; return; }
+  if (v.endsWith("@"+REQUIRED_EMAIL_DOMAIN)) { h.textContent = "Looks good."; h.className = "field-hint success"; }
+  else { h.textContent = `Please use your @${REQUIRED_EMAIL_DOMAIN} address.`; h.className = "field-hint error"; }
+}
+
+function renderStep() {
+  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+  const cur = document.querySelector(`.step[data-step="${state.step}"]`);
+  if (cur) cur.classList.add("active");
+  const pct = Math.min(100, (state.step / TOTAL_STEPS) * 100);
+  $("#progressFill").style.width = pct + "%";
+  $("#stepPill").textContent = STEP_LABELS[state.step] || "";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goNext() {
+  const err = validateStep(state.step);
+  if (err) { showStepError(err); return; }
+  state.step = Math.min(state.step + 1, TOTAL_STEPS);
+  saveDraft();
+  renderStep();
+}
+function goBack() {
+  state.step = Math.max(state.step - 1, 0);
+  saveDraft();
+  renderStep();
+}
+
+function validateStep(step) {
+  const d = state.data;
+  if (step === 0) {
+    if (!d.name || d.name.trim().length < 2) return "Please enter your name.";
+    if (!d.email) return "Please enter your Elon email.";
+    if (!d.email.toLowerCase().endsWith("@"+REQUIRED_EMAIL_DOMAIN)) return `Email must be @${REQUIRED_EMAIL_DOMAIN}.`;
+  }
+  if (step === 1) {
+    if (!d.track) return "Please pick your program track (Q1).";
+    if (!d.role || !d.role.trim()) return "Please enter your target role (Q2).";
+    if (!d.industry || !d.industry.trim()) return "Please enter your target industry (Q2).";
+    if (!d.jobStatus) return "Please pick your job-search status (Q3).";
+  }
+  if (step === 2) {
+    const incomplete = BOOTCAMPS.find(b => {
+      const bc = d.bootcamps[b.code];
+      if (!bc.format) return true;
+      // Rating required unless "Didn't take"
+      if (bc.format !== "Didn't take" && !bc.rating) return true;
+      return false;
+    });
+    if (incomplete) return `Please complete the row for ${incomplete.name}.`;
+  }
+  if (step === 3) {
+    const unrated = SKILLS.flatMap(g => g.items).find(s => !d.skillScale[s.id]);
+    if (unrated) return `Please rate "${unrated.label}" (Q6).`;
+    if (!d.missingSkill || !d.missingSkill.trim()) return "Tell us one thing the program didn't teach (Q8).";
+  }
+  if (step === 4) {
+    if (!d.bestCourses || d.bestCourses.length !== 2) return "Pick exactly two most valuable courses (Q9).";
+    if (!d.whyBest || !d.whyBest.trim()) return "Tell us briefly why (Q10).";
+    if (!d.bestNonClass) return "Pick your best non-class experience (Q11).";
+  }
+  if (step === 5) {
+    if (!d.oneChange) return "Pick one thing to change (Q12).";
+    if (d.oneChange === "Other" && (!d.oneChangeOther || !d.oneChangeOther.trim())) return "Tell us what you'd change (Q12).";
+  }
+  if (step === 6) {
+    if (!d.aiTutor || d.aiTutor.length === 0) return "Pick at least one option for the AI tutor question (Q14), or pick \"I wouldn't use one\".";
+  }
+  return null;
+}
+
+function showStepError(msg) {
+  const cur = document.querySelector(`.step.active`); if (!cur) return;
+  let banner = cur.querySelector(".error-banner");
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.className = "error-banner";
+    const actions = cur.querySelector(".actions");
+    cur.insertBefore(banner, actions);
+  }
+  banner.textContent = msg;
+  banner.scrollIntoView({ behavior: "smooth", block: "center" });
+  setTimeout(() => banner.remove(), 6000);
+}
+
+async function submit() {
+  for (let s = 0; s <= 6; s++) {
+    const err = validateStep(s);
+    if (err) { state.step = s; renderStep(); showStepError(err); return; }
+  }
+  state.data.submittedAt = new Date().toISOString();
+
+  const btn = $("#submitBtn");
+  const original = btn.innerHTML;
+  btn.innerHTML = "Submitting…";
+  btn.disabled = true;
+  document.querySelector(".step.active").classList.add("submitting");
+
+  try {
+    if (!SUBMIT_ENDPOINT || SUBMIT_ENDPOINT.startsWith("REPLACE_")) {
+      console.log("[DEV] Submission payload:", state.data);
+      await new Promise(r => setTimeout(r, 500));
+    } else {
+      const resp = await fetch(SUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(state.data)
+      });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const json = await resp.json().catch(() => ({}));
+      if (json && json.ok === false) throw new Error(json.error || "Server rejected submission.");
+    }
+    clearDraft();
+    state.step = 7;
+    renderStep();
+  } catch (err) {
+    console.error("Submit error:", err);
+    document.querySelector(".step.active").classList.remove("submitting");
+    btn.innerHTML = original;
+    btn.disabled = false;
+    document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+    const errStep = document.querySelector('.step[data-step="error"]');
+    errStep.classList.add("active");
+    $("#errorDetail").textContent = String(err.message || err);
+  }
+}
+</script>
+
+</body>
+</html>
