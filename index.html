@@ -1618,16 +1618,13 @@ async function submit() {
       console.log("[DEV] Submission payload:", state.data);
       await new Promise(r => setTimeout(r, 500));
     } else {
-      // no-cors mode: bypasses Apps Script's inconsistent CORS handling.
-      // Trade-off: response is opaque, so we can't read server-side errors.
-      // If the fetch doesn't throw (network reached Google), we assume success.
-      // Verify submissions landed by checking the Google Sheet.
-      await fetch(SUBMIT_ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(state.data)
-      });
+      // Submit via hidden iframe + form POST.
+      // This is the classic cross-origin submission pattern. It bypasses CORS
+      // entirely because the browser doesn't enforce CORS on form submissions
+      // that target an iframe. The response is opaque (we can't read it), so
+      // we resolve on iframe load OR after a timeout, then assume success.
+      // Verify submissions actually land by checking the Google Sheet.
+      await submitViaIframe(state.data);
     }
     clearDraft();
     state.step = 7;
@@ -1642,6 +1639,48 @@ async function submit() {
     errStep.classList.add("active");
     $("#errorDetail").textContent = String(err.message || err);
   }
+}
+
+function submitViaIframe(data) {
+  return new Promise((resolve) => {
+    const iframeName = "msba-submit-" + Date.now();
+    const iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = SUBMIT_ENDPOINT;
+    form.target = iframeName;
+    form.enctype = "application/x-www-form-urlencoded";
+    form.style.display = "none";
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "payload";
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      setTimeout(() => {
+        try { document.body.removeChild(iframe); } catch(_){}
+        try { document.body.removeChild(form); } catch(_){}
+      }, 200);
+      resolve();
+    };
+
+    iframe.addEventListener("load", finish);
+    // Safety timeout: assume success after 10 seconds
+    setTimeout(finish, 10000);
+
+    form.submit();
+  });
 }
 </script>
 
