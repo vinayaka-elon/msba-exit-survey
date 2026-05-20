@@ -1125,7 +1125,7 @@ textarea { resize: vertical; min-height: 96px; }
    Elon MSBA Exit Survey — v3 script
    ============================================================ */
 
-const SUBMIT_ENDPOINT = "https://script.google.com/macros/s/AKfycbxivEZGBzgKV7aM_c0senNHfWUG27DgdNpST7dxqIjet5plPdSlYrkbZN2k9yDks3X6/exec";
+const SUBMIT_ENDPOINT = "https://formspree.io/f/mwvzvkzn";
 const REQUIRED_EMAIL_DOMAIN = "elon.edu";
 const TOTAL_STEPS = 7;
 const DRAFT_KEY = "elon-msba-exit-draft-v3";
@@ -1618,13 +1618,22 @@ async function submit() {
       console.log("[DEV] Submission payload:", state.data);
       await new Promise(r => setTimeout(r, 500));
     } else {
-      // Submit via hidden iframe + form POST.
-      // This is the classic cross-origin submission pattern. It bypasses CORS
-      // entirely because the browser doesn't enforce CORS on form submissions
-      // that target an iframe. The response is opaque (we can't read it), so
-      // we resolve on iframe load OR after a timeout, then assume success.
-      // Verify submissions actually land by checking the Google Sheet.
-      await submitViaIframe(state.data);
+      // Flatten nested objects so the Formspree dashboard shows clean columns
+      const payload = flattenForSubmission(state.data);
+      const resp = await fetch(SUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!resp.ok) {
+        const text = await resp.text();
+        throw new Error(`HTTP ${resp.status}: ${text.substring(0, 200)}`);
+      }
+      const json = await resp.json().catch(() => ({}));
+      if (json && json.ok === false) throw new Error("Server rejected: " + (json.error || "unknown"));
     }
     clearDraft();
     state.step = 7;
@@ -1641,46 +1650,33 @@ async function submit() {
   }
 }
 
-function submitViaIframe(data) {
-  return new Promise((resolve) => {
-    const iframeName = "msba-submit-" + Date.now();
-    const iframe = document.createElement("iframe");
-    iframe.name = iframeName;
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = SUBMIT_ENDPOINT;
-    form.target = iframeName;
-    form.enctype = "application/x-www-form-urlencoded";
-    form.style.display = "none";
-
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "payload";
-    input.value = JSON.stringify(data);
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      setTimeout(() => {
-        try { document.body.removeChild(iframe); } catch(_){}
-        try { document.body.removeChild(form); } catch(_){}
-      }, 200);
-      resolve();
-    };
-
-    iframe.addEventListener("load", finish);
-    // Safety timeout: assume success after 10 seconds
-    setTimeout(finish, 10000);
-
-    form.submit();
+function flattenForSubmission(data) {
+  const out = { ...data };
+  // Bootcamps → bootcamp_5002_rating, bootcamp_5002_format, etc.
+  if (out.bootcamps && typeof out.bootcamps === "object") {
+    Object.keys(out.bootcamps).forEach(code => {
+      const bc = out.bootcamps[code] || {};
+      out[`bootcamp_${code}_rating`] = bc.rating || "";
+      out[`bootcamp_${code}_format`] = bc.format || "";
+    });
+    delete out.bootcamps;
+  }
+  // Skill scale → skill_python, skill_sql, etc.
+  if (out.skillScale && typeof out.skillScale === "object") {
+    Object.keys(out.skillScale).forEach(id => {
+      out[`skill_${id}`] = out.skillScale[id] || "";
+    });
+    delete out.skillScale;
+  }
+  // Arrays → comma-separated strings (Formspree shows arrays as JSON; strings read better)
+  ["gaps", "bestCourses", "aiTutor"].forEach(key => {
+    if (Array.isArray(out[key])) out[key] = out[key].join(", ");
   });
+  // Booleans → Yes / blank
+  ["optMentor", "optQuote", "optContact"].forEach(key => {
+    out[key] = out[key] ? "Yes" : "";
+  });
+  return out;
 }
 </script>
 
